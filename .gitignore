@@ -2,7 +2,7 @@
 /shelf/
 .gradle
 .idea
-build
+build/
 HELP.md
 # Editor-based HTTP Client requests
 /httpRequests/
