@@ -4,6 +4,7 @@ import com.ssafit.user.dto.request.CreateUserRequestDto;
 import com.ssafit.user.dto.request.LoginUserRequestDto;
 import com.ssafit.user.dto.response.UserResponseDto;
 import com.ssafit.user.service.UserService;
+import io.swagger.annotations.ApiModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/user")
+@ApiModel(value = "유저 정보")
 public class userController {
 
     private final UserService userService;
