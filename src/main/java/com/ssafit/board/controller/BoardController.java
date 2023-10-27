@@ -4,11 +4,12 @@ import java.util.Map;
 
 import com.ssafit.board.model.Board;
 import com.ssafit.board.service.BoardService;
+import io.swagger.annotations.ApiModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
+@ApiModel(value = "게시판 정보")
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api")

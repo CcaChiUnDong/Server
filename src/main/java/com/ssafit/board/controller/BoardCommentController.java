@@ -3,12 +3,14 @@ package com.ssafit.board.controller;
 import com.ssafit.board.model.Board;
 import com.ssafit.board.model.BoardComment;
 import com.ssafit.board.service.BoardCommentService;
+import io.swagger.annotations.ApiModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
 
+@ApiModel(value = "댓글 정보")
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api")

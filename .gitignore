@@ -1,8 +1,8 @@
 # Default ignored files
 /shelf/
-/.gradle/
-/.idea/
-/build/
+.gradle
+.idea
+build/
 HELP.md
 # Editor-based HTTP Client requests
 /httpRequests/
