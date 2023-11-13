@@ -10,4 +10,3 @@ public class SsafitApplication {
         SpringApplication.run(SsafitApplication.class, args);
     }
 }
-s
