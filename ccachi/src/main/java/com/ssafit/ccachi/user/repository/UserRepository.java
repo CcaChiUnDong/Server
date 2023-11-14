@@ -19,12 +19,14 @@ public class UserRepository {
 
     public List<User> selectAll(){
         List<User> result = userDao.selectAll();
-        System.out.println(result);
         return result;
     }
     public User select(long id){
         User result = userDao.select(id);
-        System.out.println(result);
+        return result;
+    }
+    public User selectByEmail(String email){
+        User result = userDao.selectByEmail(email);
         return result;
     }
     public void createUser(CreateUserRequestDto createUserRequestDto){

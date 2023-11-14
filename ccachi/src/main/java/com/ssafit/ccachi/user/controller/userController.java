@@ -3,6 +3,7 @@ package com.ssafit.ccachi.user.controller;
 
 import com.ssafit.ccachi.user.dto.request.CreateUserRequestDto;
 import com.ssafit.ccachi.user.dto.request.EmailCheckRequestDto;
+import com.ssafit.ccachi.user.dto.request.LoginUserRequestDto;
 import com.ssafit.ccachi.user.dto.response.EmailCheckResponseDto;
 import com.ssafit.ccachi.user.dto.response.UserResponseDto;
 import com.ssafit.ccachi.user.service.UserService;
@@ -44,9 +45,9 @@ public class userController {
         userService.createUser(createUserRequestDto);
     }
 
-//    @PostMapping("/login")
-//    @ResponseStatus(HttpStatus.OK)
-//    public UserResponseDto login(@ModelAttribute LoginUserRequestDto loginUserRequestDto){
-//        return userService.login(loginUserRequestDto);
-//    }
+    @PostMapping("/login")
+    @ResponseStatus(HttpStatus.OK)
+    public UserResponseDto login(@RequestBody LoginUserRequestDto loginUserRequestDto) throws Exception {
+        return userService.login(loginUserRequestDto);
+    }
 }

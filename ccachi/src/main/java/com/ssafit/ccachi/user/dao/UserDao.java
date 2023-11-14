@@ -3,9 +3,7 @@ package com.ssafit.ccachi.user.dao;
 import com.ssafit.ccachi.user.Entity.User;
 import com.ssafit.ccachi.user.dto.request.CreateUserRequestDto;
 import com.ssafit.ccachi.user.dto.response.UserResponseDto;
-import com.ssafit.ccachi.user.repository.UserRepository;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -13,6 +11,7 @@ import java.util.List;
 public interface UserDao {
 	List<User> selectAll();
 	User select(Long id);
+	User selectByEmail(String email);
 	void createUser(CreateUserRequestDto createUserRequestDto);
 	List<User> checkByEmail(String email);
 
