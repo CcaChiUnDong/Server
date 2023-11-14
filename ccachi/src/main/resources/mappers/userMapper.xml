@@ -4,16 +4,33 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssafit.ccachi.user.dao.UserDao">
 	<resultMap type="User" id="userMap">
-		<result column="id" property="id"/>
-		<result column="name" property="name"/>
-		<result column="email" property="email"/>
 	</resultMap>
 
-<!--	 전체 유저 조회 -->
+	<!-- 전체 유저 조회 -->
 	<select id="selectAll" resultType="User">
 		SELECT id, name, email
 		FROM user;
 	</select>
+
+	<!-- 단일 유저 조회 -->
+	<select id="select" resultType="User">
+		SELECT id, name, email
+		FROM user
+		WHERE id = #{id};
+	</select>
+
+	<!-- 단일 유저 조회 -->
+	<select id="checkByEmail" resultType="User">
+		SELECT id, name, email
+		FROM user
+		WHERE email = #{email};
+	</select>
+
+	<!--	유저 회원가입-->
+	<insert id="createUser" parameterType="User" keyProperty="id" useGeneratedKeys="true">
+		INSERT INTO user (id, name, password, email)
+		VALUES (0, #{name}, #{password}, #{email})
+	</insert>
 
 	<!-- 상세글 조회 -->
 <!--	<select id="selectOne" resultMap="boardMap" parameterType="int">-->
@@ -22,11 +39,7 @@
 <!--		WHERE id = #{id};-->
 <!--	</select>-->
 
-	<!-- 게시글 등록(서8 박정훈) -->
-<!--	<insert id="insertBoard" parameterType="Board" keyProperty="id" useGeneratedKeys="true">-->
-<!--		INSERT INTO board (id, title, writer, content)-->
-<!--		VALUES (#{id}, #{title}, #{writer}, #{content})-->
-<!--	</insert>-->
+
 	
 	<!-- 게시글 삭제 -->
 <!--	<delete id="deleteBoard" parameterType="int">-->

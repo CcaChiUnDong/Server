@@ -12,26 +12,11 @@ import lombok.Setter;
 @Builder
 public class CreateUserRequestDto {
 
-    @Override
-    public String toString() {
-        return "CreateUserRequestDto{" +
-                "userId='" + userId + '\'' +
-                ", password='" + password + '\'' +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
-                '}';
-    }
-
-    //    @NonNull
-    private String userId;
+    private Long id;
 //    @NonNull
     private String password;
 //    @NonNull
     private String name;
 //    @NonNull
     private String email;
-//    @NonNull
-    private String phone;
-
 }

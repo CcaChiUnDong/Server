@@ -1,6 +1,9 @@
 package com.ssafit.ccachi.user.controller;
 
 
+import com.ssafit.ccachi.user.dto.request.CreateUserRequestDto;
+import com.ssafit.ccachi.user.dto.request.EmailCheckRequestDto;
+import com.ssafit.ccachi.user.dto.response.EmailCheckResponseDto;
 import com.ssafit.ccachi.user.dto.response.UserResponseDto;
 import com.ssafit.ccachi.user.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -24,12 +27,22 @@ public class userController {
         return userService.selectAll();
     }
 
-//    @PostMapping("/register")
-//    @ResponseStatus(HttpStatus.OK)
-//    public UserResponseDto signUp(@ModelAttribute CreateUserRequestDto createUserRequestDto){
-//        System.out.println(createUserRequestDto.toString());
-//        return userService.createUser(createUserRequestDto);
-//    }
+    @GetMapping("/{userId}")
+    @ResponseStatus(HttpStatus.OK)
+    public UserResponseDto select(@PathVariable Long userId){
+        return userService.select(userId);
+    }
+    @PostMapping("/check")
+    @ResponseStatus(HttpStatus.OK)
+    public EmailCheckResponseDto check(@RequestBody EmailCheckRequestDto emailCheckRequestDto){
+        System.out.println(emailCheckRequestDto.getEmail());
+        return userService.check(emailCheckRequestDto.getEmail());
+    }
+    @PostMapping("/signup")
+    @ResponseStatus(HttpStatus.OK)
+    public void createUser(@RequestBody CreateUserRequestDto createUserRequestDto){
+        userService.createUser(createUserRequestDto);
+    }
 
 //    @PostMapping("/login")
 //    @ResponseStatus(HttpStatus.OK)

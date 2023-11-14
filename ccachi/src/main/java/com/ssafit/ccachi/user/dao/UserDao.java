@@ -1,18 +1,25 @@
 package com.ssafit.ccachi.user.dao;
 
 import com.ssafit.ccachi.user.Entity.User;
+import com.ssafit.ccachi.user.dto.request.CreateUserRequestDto;
 import com.ssafit.ccachi.user.dto.response.UserResponseDto;
+import com.ssafit.ccachi.user.repository.UserRepository;
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@FunctionalInterface
+@Mapper
 public interface UserDao {
-	List<UserResponseDto> selectAll();
+	List<User> selectAll();
+	User select(Long id);
+	void createUser(CreateUserRequestDto createUserRequestDto);
+	List<User> checkByEmail(String email);
 
-//	// ID에 해당하는 게시글 하나 가져오기
-//	public Board selectOne(int id);
-//
+
+	// ID에 해당하는 게시글 하나 가져오기
+	UserResponseDto logIn (String email, String password);
+
 //	// 게시글 등록
 //	public void insertBoard(Board board);
 //
