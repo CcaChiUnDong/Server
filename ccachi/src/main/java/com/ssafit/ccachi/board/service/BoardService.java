@@ -39,21 +39,24 @@ public class BoardService {
     public List<BoardResponseDto> readAll(){
         List<Board> boardList = boardReposiroty.readAll();
         Map<Long, UserResponseDto> userMap = new HashMap<>();
-        System.out.println(1);
         for(Board board : boardList){
-            System.out.println(board.getId());
-            System.out.println(board);
             if(!userMap.containsKey(board.getUserId())){
                 System.out.println(board.getUserId());
                 userMap.put(board.getUserId(),userConverter.convert(userRepository.select(board.getUserId())));
             }
         }
-        System.out.println(2);
         List<BoardResponseDto> result = boardList.stream().map(converter::convert).collect(Collectors.toList());
         for(BoardResponseDto board : result){
             board.setUser(userMap.get(board.getUserId()));
         }
-        System.out.println(3);
+        return result;
+    }
+
+    public BoardResponseDto read(Long id){
+        Board targetBoard = boardReposiroty.read(id);
+        BoardResponseDto result = converter.convert(targetBoard);
+        UserResponseDto user = userConverter.convert(userRepository.select(result.getUserId()));
+        result.setUser(user);
         return result;
     }
 

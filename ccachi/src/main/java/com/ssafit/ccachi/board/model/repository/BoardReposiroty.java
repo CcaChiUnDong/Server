@@ -21,7 +21,6 @@ public class BoardReposiroty {
         boardDao.create(createBoardRequestDto);
     }
 
-    public List<Board> readAll(){
-        return boardDao.readAll();
-    }
+    public List<Board> readAll(){ return boardDao.readAll(); }
+    public Board read(Long id){ return boardDao.read(id); }
 }

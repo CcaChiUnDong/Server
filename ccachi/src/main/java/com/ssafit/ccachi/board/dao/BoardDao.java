@@ -11,4 +11,5 @@ import java.util.List;
 public interface BoardDao {
     void create(CreateBoardRequestDto createBoardRequestDto);
     List<Board> readAll();
+    Board read(Long id);
 }

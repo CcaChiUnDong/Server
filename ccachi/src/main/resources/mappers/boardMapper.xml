@@ -15,5 +15,8 @@
 	<select id="readAll">
 		SELECT * FROM board
 	</select>
-
+	<select id="read">
+		SELECT * FROM board
+		WHERE id = #{id}
+	</select>
 </mapper>

@@ -30,4 +30,9 @@ public class BoardController {
     public List<BoardResponseDto> readAll() throws Exception {
         return boardService.readAll();
     }
+    @GetMapping("/{boardId}")
+    @ResponseStatus(HttpStatus.OK)
+    public BoardResponseDto read(@PathVariable Long boardId) throws Exception {
+        return boardService.read(boardId);
+    }
 }

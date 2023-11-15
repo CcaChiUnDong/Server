@@ -13,7 +13,7 @@ public class BoardToResponseConverter implements DtoConverter<Board, BoardRespon
         return BoardResponseDto.builder()
                 .id(obj.getId())
                 .comment_count(obj.getCommentCount())
-                .content(obj.getContent())
+                .contents(obj.getContents())
                 .createdAt(obj.getCreatedAt())
                 .title(obj.getTitle())
                 .userId(obj.getUserId())

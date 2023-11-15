@@ -17,7 +17,7 @@ public class BoardResponseDto {
     private Long id;
     private Long userId;
     private String title;
-    private String content;
+    private String contents;
     private Long comment_count;
     private UserResponseDto user;
     private LocalDateTime createdAt;

@@ -21,8 +21,8 @@ public class Board {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "content")
-    private String content;
+    @Column(name = "contents")
+    private String contents;
 
     @Column(name = "commentCount")
     private Long commentCount;
@@ -35,7 +35,7 @@ public class Board {
 
     @Builder
     protected Board(String content, Long comment_count, Long user_id) {
-        this.content = content;
+        this.contents = content;
         this.commentCount = comment_count;
         this.userId = user_id;
     }
@@ -45,7 +45,7 @@ public class Board {
         return "Board{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", content='" + content + '\'' +
+                ", content='" + contents + '\'' +
                 ", comment_count=" + commentCount +
                 ", user_id=" + userId +
                 ", createdAt=" + createdAt +
