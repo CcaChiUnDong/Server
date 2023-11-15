@@ -14,10 +14,8 @@ public enum ErrorCode {
     WRONG_EMAIL(400,"email이 일치하는 user가 없습니다."),
 
     //404 NOT_FOUND 잘못된 리소스 접근
-    DISPLAY_NOT_FOUND(404, "존재하지 않는 전시회 ID 입니다."),
 
     //409 CONFLICT 중복된 리소스
-    ALREADY_SAVED_DISPLAY(409, "이미 저장한 전시회입니다."),
 
     //500 INTERNAL SERVER ERROR
     INTERNAL_SERVER_ERROR(500, "서버 에러입니다. 서버 팀에 연락주세요!");

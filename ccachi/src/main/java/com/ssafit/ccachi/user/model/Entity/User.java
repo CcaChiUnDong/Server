@@ -1,4 +1,4 @@
-package com.ssafit.ccachi.user.Entity;
+package com.ssafit.ccachi.user.model.Entity;
 
 import lombok.*;
 

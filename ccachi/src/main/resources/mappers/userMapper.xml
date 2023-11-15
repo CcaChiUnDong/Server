@@ -9,31 +9,31 @@
 	<!-- 전체 유저 조회 -->
 	<select id="selectAll" resultType="User">
 		SELECT id, name, email
-		FROM user;
+		FROM ccachiuser;
 	</select>
 
 	<!-- 단일 유저 조회 -->
 	<select id="select" resultType="User">
 		SELECT id, name, email
-		FROM user
+		FROM ccachiuser
 		WHERE id = #{id};
 	</select>
 	<!-- 단일 유저 조회(이메일) -->
 	<select id="selectByEmail" resultType="User">
 		SELECT id, name, email, password
-		FROM user
+		FROM ccachiuser
 		WHERE email = #{email};
 	</select>
 	<!-- 단일 유저 조회 -->
 	<select id="checkByEmail" resultType="User">
 		SELECT id, name, email
-		FROM user
+		FROM ccachiuser
 		WHERE email = #{email};
 	</select>
 
 	<!--	유저 회원가입-->
 	<insert id="createUser" parameterType="User" keyProperty="id" useGeneratedKeys="true">
-		INSERT INTO user (id, name, password, email)
+		INSERT INTO ccachiuser (id, name, password, email)
 		VALUES (0, #{name}, #{password}, #{email})
 	</insert>
 

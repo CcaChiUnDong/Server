@@ -1,8 +1,8 @@
 package com.ssafit.ccachi.user.dao;
 
-import com.ssafit.ccachi.user.Entity.User;
-import com.ssafit.ccachi.user.dto.request.CreateUserRequestDto;
-import com.ssafit.ccachi.user.dto.response.UserResponseDto;
+import com.ssafit.ccachi.user.model.Entity.User;
+import com.ssafit.ccachi.user.model.dto.request.CreateUserRequestDto;
+import com.ssafit.ccachi.user.model.dto.response.UserResponseDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

@@ -1,11 +1,11 @@
 package com.ssafit.ccachi.user.controller;
 
 
-import com.ssafit.ccachi.user.dto.request.CreateUserRequestDto;
-import com.ssafit.ccachi.user.dto.request.EmailCheckRequestDto;
-import com.ssafit.ccachi.user.dto.request.LoginUserRequestDto;
-import com.ssafit.ccachi.user.dto.response.EmailCheckResponseDto;
-import com.ssafit.ccachi.user.dto.response.UserResponseDto;
+import com.ssafit.ccachi.user.model.dto.request.CreateUserRequestDto;
+import com.ssafit.ccachi.user.model.dto.request.EmailCheckRequestDto;
+import com.ssafit.ccachi.user.model.dto.request.LoginUserRequestDto;
+import com.ssafit.ccachi.user.model.dto.response.EmailCheckResponseDto;
+import com.ssafit.ccachi.user.model.dto.response.UserResponseDto;
 import com.ssafit.ccachi.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

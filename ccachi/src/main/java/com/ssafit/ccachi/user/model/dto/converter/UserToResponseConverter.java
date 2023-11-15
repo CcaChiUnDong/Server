@@ -1,8 +1,8 @@
-package com.ssafit.ccachi.user.dto.converter;
+package com.ssafit.ccachi.user.model.dto.converter;
 
 import com.ssafit.ccachi.global.dto.converter.DtoConverter;
-import com.ssafit.ccachi.user.Entity.User;
-import com.ssafit.ccachi.user.dto.response.UserResponseDto;
+import com.ssafit.ccachi.user.model.Entity.User;
+import com.ssafit.ccachi.user.model.dto.response.UserResponseDto;
 import org.springframework.stereotype.Component;
 
 @Component

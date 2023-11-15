@@ -1,10 +1,9 @@
-package com.ssafit.ccachi.user.repository;
+package com.ssafit.ccachi.user.model.repository;
 
 import com.ssafit.ccachi.global.exception.CustomException;
-import com.ssafit.ccachi.user.Entity.User;
+import com.ssafit.ccachi.user.model.Entity.User;
 import com.ssafit.ccachi.user.dao.UserDao;
-import com.ssafit.ccachi.user.dto.request.CreateUserRequestDto;
-import com.ssafit.ccachi.user.dto.response.UserResponseDto;
+import com.ssafit.ccachi.user.model.dto.request.CreateUserRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,5 +41,4 @@ public class UserRepository {
         List<User> userList = userDao.checkByEmail(email);
         return userList.isEmpty();
     }
-//    public User login(LoginUserRequestDto loginUserRequestDto){ return userDao.login(loginUserRequestDto);}
 }

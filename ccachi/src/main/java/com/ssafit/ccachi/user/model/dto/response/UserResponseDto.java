@@ -1,4 +1,4 @@
-package com.ssafit.ccachi.user.dto.response;
+package com.ssafit.ccachi.user.model.dto.response;
 
 
 import lombok.*;

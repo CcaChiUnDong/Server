@@ -14,7 +14,8 @@ create table user
 create table board
 (
     id            bigint primary key auto_increment,
-    content       varchar(255) not null,
+    contents       varchar(255) not null,
+    title       varchar(127) not null,
     comment_count bigint       not null default 0 check (comment_count >= 0),
     created_at    timestamp    not null default now(),
     user_id     bigint       not null references user (id) on update cascade on delete cascade

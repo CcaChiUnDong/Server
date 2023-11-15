@@ -1,4 +1,4 @@
-package com.ssafit.ccachi.user.dto.request;
+package com.ssafit.ccachi.user.model.dto.request;
 
 
 import lombok.AllArgsConstructor;
