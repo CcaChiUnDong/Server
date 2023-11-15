@@ -36,7 +36,6 @@ public class userController {
     @PostMapping("/check")
     @ResponseStatus(HttpStatus.OK)
     public EmailCheckResponseDto check(@RequestBody EmailCheckRequestDto emailCheckRequestDto){
-        System.out.println(emailCheckRequestDto.getEmail());
         return userService.check(emailCheckRequestDto.getEmail());
     }
     @PostMapping("/signup")

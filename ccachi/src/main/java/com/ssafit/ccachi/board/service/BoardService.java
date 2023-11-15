@@ -42,7 +42,6 @@ public class BoardService {
         Map<Long, UserResponseDto> userMap = new HashMap<>();
         for(Board board : boardList){
             if(!userMap.containsKey(board.getUserId())){
-                System.out.println(board.getUserId());
                 userMap.put(board.getUserId(),userConverter.convert(userRepository.select(board.getUserId())));
             }
         }
