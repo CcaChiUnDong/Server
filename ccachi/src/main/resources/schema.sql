@@ -1,8 +1,8 @@
 DROP TABLE IF EXISTS comment cascade ;
 DROP TABLE IF EXISTS board cascade;
-DROP TABLE IF EXISTS user cascade;
+DROP TABLE IF EXISTS ccachiuser cascade;
 
-create table user
+create table ccachiuser
 (
     id              bigint primary key auto_increment,
     email           varchar(50) not null unique,
@@ -18,7 +18,8 @@ create table board
     title       varchar(127) not null,
     comment_count bigint       not null default 0 check (comment_count >= 0),
     created_at    timestamp    not null default now(),
-    user_id     bigint       not null references user (id) on update cascade on delete cascade
+    user_id     bigint       not null,
+    FOREIGN KEY (user_id) REFERENCES ccachiuser(id) on update cascade on delete cascade
 );
 
 create table comment
@@ -26,6 +27,8 @@ create table comment
     id         bigint primary key auto_increment,
     content    varchar(127) not null,
     created_at timestamp    not null default now(),
-    board_id  bigint       not null references board (id) on update cascade on delete cascade,
-    user_id  bigint       not null references user (id) on update cascade on delete cascade
+    board_id  bigint       not null,
+    user_id  bigint       not null,
+    FOREIGN KEY (user_id) REFERENCES ccachiuser(id) on update cascade on delete cascade,
+    FOREIGN KEY (board_id) REFERENCES board(id) on update cascade on delete cascade
 );
