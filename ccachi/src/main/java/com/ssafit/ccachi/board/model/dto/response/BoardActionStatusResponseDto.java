@@ -9,6 +9,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @Builder
-public class CreateBoardResponseDto {
-    private Boolean created;
+public class BoardActionStatusResponseDto {
+    private Boolean status;
 }

@@ -2,8 +2,9 @@ package com.ssafit.ccachi.board.service;
 
 import com.ssafit.ccachi.board.model.Entity.Board;
 import com.ssafit.ccachi.board.model.dto.request.CreateBoardRequestDto;
+import com.ssafit.ccachi.board.model.dto.request.UpdateBoardRequestDto;
+import com.ssafit.ccachi.board.model.dto.response.BoardActionStatusResponseDto;
 import com.ssafit.ccachi.board.model.dto.response.BoardResponseDto;
-import com.ssafit.ccachi.board.model.dto.response.CreateBoardResponseDto;
 import com.ssafit.ccachi.board.model.repository.BoardReposiroty;
 import com.ssafit.ccachi.global.dto.converter.DtoConverter;
 import com.ssafit.ccachi.user.model.Entity.User;
@@ -31,9 +32,9 @@ public class BoardService {
     private final BoardReposiroty boardReposiroty;
     private final UserRepository userRepository;
 
-    public CreateBoardResponseDto createBoard(CreateBoardRequestDto createBoardRequestDto) throws Exception {
-        boardReposiroty.createBoard(createBoardRequestDto);
-        return CreateBoardResponseDto.builder().created(true).build();
+    public BoardActionStatusResponseDto create(CreateBoardRequestDto createBoardRequestDto) throws Exception {
+        boardReposiroty.create(createBoardRequestDto);
+        return BoardActionStatusResponseDto.builder().status(true).build();
     }
 
     public List<BoardResponseDto> readAll(){
@@ -60,4 +61,13 @@ public class BoardService {
         return result;
     }
 
+    public BoardActionStatusResponseDto delete(Long id) throws Exception {
+        boardReposiroty.delete(id);
+        return BoardActionStatusResponseDto.builder().status(true).build();
+    }
+
+    public BoardActionStatusResponseDto update(UpdateBoardRequestDto updateBoardRequestDto) throws Exception {
+        boardReposiroty.update(updateBoardRequestDto);
+        return BoardActionStatusResponseDto.builder().status(true).build();
+    }
 }
