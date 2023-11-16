@@ -4,7 +4,6 @@ import com.ssafit.ccachi.board.model.Entity.Board;
 import com.ssafit.ccachi.board.model.dto.request.CreateBoardRequestDto;
 import com.ssafit.ccachi.board.model.dto.request.UpdateBoardRequestDto;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
