@@ -14,4 +14,5 @@ public interface BoardDao {
     Board read(Long id);
     void delete(Long id);
     void update(UpdateBoardRequestDto updateBoardRequestDto);
+    void visit(Long id);
 }

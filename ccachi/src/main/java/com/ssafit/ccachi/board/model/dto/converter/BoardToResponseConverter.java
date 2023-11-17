@@ -17,6 +17,7 @@ public class BoardToResponseConverter implements DtoConverter<Board, BoardRespon
                 .createdAt(obj.getCreatedAt())
                 .title(obj.getTitle())
                 .userId(obj.getUserId())
+                .visited(obj.getVisited())
                 .build();
     }
 

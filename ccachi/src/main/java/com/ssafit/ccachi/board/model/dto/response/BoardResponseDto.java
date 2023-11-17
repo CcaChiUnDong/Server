@@ -21,4 +21,5 @@ public class BoardResponseDto {
     private Long comment_count;
     private UserResponseDto user;
     private LocalDateTime createdAt;
+    private Long visited;
 }

@@ -20,7 +20,9 @@ public class BoardReposiroty {
     public void create(CreateBoardRequestDto createBoardRequestDto) throws Exception{ boardDao.create(createBoardRequestDto);}
 
     public List<Board> readAll(){ return boardDao.readAll(); }
-    public Board read(Long id){ return boardDao.read(id); }
+    public Board read(Long id){
+        boardDao.visit(id);
+        return boardDao.read(id); }
     public void delete(Long id){ boardDao.delete(id); }
     public void update(UpdateBoardRequestDto updateBoardRequestDto) throws Exception{ boardDao.update(updateBoardRequestDto);}
 }

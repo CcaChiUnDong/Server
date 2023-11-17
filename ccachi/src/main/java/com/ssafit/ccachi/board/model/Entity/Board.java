@@ -33,6 +33,9 @@ public class Board {
     @Column(name = "createdAt")
     private LocalDateTime createdAt;
 
+    @Column(name = "visited")
+    private Long visited;
+
     @Builder
     protected Board(String content, Long comment_count, Long user_id) {
         this.contents = content;

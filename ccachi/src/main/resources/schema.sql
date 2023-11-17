@@ -19,6 +19,8 @@ create table board
     comment_count bigint       not null default 0 check (comment_count >= 0),
     created_at    timestamp    not null default now(),
     user_id     bigint       not null,
+    url         varchar(255),
+    visited     bigint default 0,
     FOREIGN KEY (user_id) REFERENCES ccachiuser(id) on update cascade on delete cascade
 );
 
