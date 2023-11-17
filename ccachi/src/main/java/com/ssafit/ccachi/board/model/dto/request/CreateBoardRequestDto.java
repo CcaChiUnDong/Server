@@ -15,6 +15,8 @@ public class CreateBoardRequestDto {
     @NonNull
     private String title;
 
+    private String url;
+
     @Override
     public String toString() {
         return "CreateBoardRequestDto{" +

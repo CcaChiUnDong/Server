@@ -8,8 +8,8 @@
 
 	<!-- 글쓰기 -->
 	<insert id="create" parameterType="Board" keyProperty="id" useGeneratedKeys="true">
-		INSERT INTO board (id,title, contents, user_id)
-		VALUES (0, #{title}, #{contents}, #{user_id})
+		INSERT INTO board (id,title, contents, user_id,url)
+		VALUES (0, #{title}, #{contents}, #{user_id},#{url})
 	</insert>
 
 	<select id="readAll">

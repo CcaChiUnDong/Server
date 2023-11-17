@@ -36,6 +36,9 @@ public class Board {
     @Column(name = "visited")
     private Long visited;
 
+    @Column(name = "url")
+    private String url;
+
     @Builder
     protected Board(String content, Long comment_count, Long user_id) {
         this.contents = content;

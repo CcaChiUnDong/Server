@@ -22,4 +22,5 @@ public class BoardResponseDto {
     private UserResponseDto user;
     private LocalDateTime createdAt;
     private Long visited;
+    private String url;
 }
