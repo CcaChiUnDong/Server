@@ -32,3 +32,25 @@ create table comment
     FOREIGN KEY (user_id) REFERENCES ccachiuser(id) on update cascade on delete cascade,
     FOREIGN KEY (board_id) REFERENCES board(id) on update cascade on delete cascade
 );
+
+DELIMITER $$
+CREATE TRIGGER update_comment_count
+AFTER INSERT ON comment
+    FOR EACH ROW
+BEGIN
+    UPDATE board
+    SET comment_count = comment_count + 1
+    WHERE id = NEW.board_id;
+END;$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER delete_comment_update_count
+AFTER DELETE ON comment
+    FOR EACH ROW
+BEGIN
+    UPDATE board
+    SET comment_count = comment_count - 1
+    WHERE id = OLD.board_id;
+END;$$
+DELIMITER ;
