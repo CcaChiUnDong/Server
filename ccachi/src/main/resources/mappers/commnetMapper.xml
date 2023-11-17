@@ -14,5 +14,15 @@
 	<select id="readAll">
 		SELECT * FROM comment
 		WHERE board_id = #{board_id}
+		ORDER BY created_at
 	</select>
+	<delete id="delete">
+		DELETE FROM comment
+		WHERE id = #{id}
+	</delete>
+	<update id="update">
+		UPDATE comment
+		SET content = #{content}
+		WHERE id = #{id}
+	</update>
 </mapper>

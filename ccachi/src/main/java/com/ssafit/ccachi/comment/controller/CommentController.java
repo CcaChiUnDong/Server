@@ -29,4 +29,16 @@ public class CommentController {
     public List<CommentResponseDto> readAll(@PathVariable Long board_id){
         return commentService.readAll(board_id);
     }
+
+    @DeleteMapping("/{comment_id}")
+    @ResponseStatus(HttpStatus.OK)
+    public GeneralStatusResponse delete(@PathVariable Long comment_id) throws Exception {
+        return commentService.delete(comment_id);
+    }
+
+    @PatchMapping("")
+    @ResponseStatus(HttpStatus.OK)
+    public GeneralStatusResponse update(@RequestBody CreateCommentDto createCommentDto) throws Exception {
+        return commentService.update(createCommentDto);
+    }
 }

@@ -14,6 +14,7 @@
 
 	<select id="readAll">
 		SELECT * FROM board
+		ORDER BY created_at
 	</select>
 	<select id="read">
 		SELECT * FROM board

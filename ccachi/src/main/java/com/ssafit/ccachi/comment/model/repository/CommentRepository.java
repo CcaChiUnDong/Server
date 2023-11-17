@@ -19,5 +19,9 @@ public class CommentRepository {
     public void create(CreateCommentDto createCommentDto) throws Exception{
         commentDao.create(createCommentDto);
     }
+    public void update(CreateCommentDto createCommentDto) throws Exception{
+        commentDao.update(createCommentDto);
+    }
     public List<Comment> readAll(Long board_id){return commentDao.readAll(board_id);}
+    public void delete(Long comment_id) throws Exception{commentDao.delete(comment_id);}
 }

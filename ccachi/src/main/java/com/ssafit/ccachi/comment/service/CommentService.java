@@ -34,6 +34,16 @@ public class CommentService {
         return GeneralStatusResponse.builder().status(true).build();
     }
 
+    public GeneralStatusResponse update(CreateCommentDto createCommentDto) throws Exception {
+        commentRepository.update(createCommentDto);
+        return GeneralStatusResponse.builder().status(true).build();
+    }
+
+    public GeneralStatusResponse delete(Long comment_id) throws Exception {
+        commentRepository.delete(comment_id);
+        return GeneralStatusResponse.builder().status(true).build();
+    }
+
     public List<CommentResponseDto> readAll(Long board_id){
         Map<Long, UserResponseDto> userMemo = new HashMap<>();
         List<Comment> commentsList = commentRepository.readAll(board_id);

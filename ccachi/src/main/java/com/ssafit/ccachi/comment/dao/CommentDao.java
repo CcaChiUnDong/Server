@@ -10,4 +10,6 @@ import java.util.List;
 public interface CommentDao {
     void create(CreateCommentDto createCommentDto);
     List<Comment> readAll(Long board_id);
+    void delete(Long comment_id);
+    void update(CreateCommentDto createCommentDto);
 }
