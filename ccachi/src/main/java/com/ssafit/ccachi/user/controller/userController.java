@@ -1,6 +1,7 @@
 package com.ssafit.ccachi.user.controller;
 
 
+import com.ssafit.ccachi.global.token.JwtTokenUtils;
 import com.ssafit.ccachi.user.model.dto.request.CreateUserRequestDto;
 import com.ssafit.ccachi.user.model.dto.request.EmailCheckRequestDto;
 import com.ssafit.ccachi.user.model.dto.request.LoginUserRequestDto;
@@ -8,7 +9,9 @@ import com.ssafit.ccachi.user.model.dto.response.EmailCheckResponseDto;
 import com.ssafit.ccachi.user.model.dto.response.UserResponseDto;
 import com.ssafit.ccachi.user.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +24,10 @@ public class userController {
 
     private final UserService userService;
 
+    @Value("${jwt.secretKey}")
+    private String key;
+    @Value("${jwt.expireLength}")
+    private Long expiredTimeMs;
 
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
@@ -46,7 +53,9 @@ public class userController {
 
     @PostMapping("/login")
     @ResponseStatus(HttpStatus.OK)
-    public UserResponseDto login(@RequestBody LoginUserRequestDto loginUserRequestDto) throws Exception {
-        return userService.login(loginUserRequestDto);
+    public ResponseEntity<UserResponseDto> login(@RequestBody LoginUserRequestDto loginUserRequestDto) throws Exception {
+        UserResponseDto result = userService.login(loginUserRequestDto);
+        String token = JwtTokenUtils.generateToken(result,key,expiredTimeMs);
+        return ResponseEntity.ok().header("Authorization", "Bearer " + token).body(result);
     }
 }

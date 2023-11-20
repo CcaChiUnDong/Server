@@ -3,6 +3,7 @@ package com.ssafit.ccachi.user.service;
 
 import com.ssafit.ccachi.global.dto.converter.DtoConverter;
 import com.ssafit.ccachi.global.exception.CustomException;
+import com.ssafit.ccachi.global.token.JwtTokenUtils;
 import com.ssafit.ccachi.user.model.Entity.User;
 import com.ssafit.ccachi.user.model.dto.request.CreateUserRequestDto;
 import com.ssafit.ccachi.user.model.dto.request.LoginUserRequestDto;
@@ -10,6 +11,7 @@ import com.ssafit.ccachi.user.model.dto.response.EmailCheckResponseDto;
 import com.ssafit.ccachi.user.model.dto.response.UserResponseDto;
 import com.ssafit.ccachi.user.model.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +27,8 @@ public class UserService {
 
     private final DtoConverter<User, UserResponseDto> converter;
     private final UserRepository userRepository;
+
+
 
     public void createUser(CreateUserRequestDto createUserRequestDto){ userRepository.createUser(createUserRequestDto); }
     public List<UserResponseDto> selectAll(){ return userRepository.selectAll().stream().map(converter::convert).collect(Collectors.toList()); }
