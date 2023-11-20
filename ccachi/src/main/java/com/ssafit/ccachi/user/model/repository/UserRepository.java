@@ -20,6 +20,9 @@ public class UserRepository {
 
     private final UserDao userDao;
 
+    public void delete(Long id){
+        userDao.delete(id);
+    }
     public List<User> selectAll(){
         List<User> result = userDao.selectAll();
         return result;

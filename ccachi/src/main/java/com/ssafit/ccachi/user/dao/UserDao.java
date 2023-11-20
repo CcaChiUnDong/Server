@@ -14,7 +14,7 @@ public interface UserDao {
 	User selectByEmail(String email);
 	void createUser(CreateUserRequestDto createUserRequestDto);
 	List<User> checkByEmail(String email);
-
+	void delete(Long id);
 
 	// ID에 해당하는 게시글 하나 가져오기
 	UserResponseDto logIn (String email, String password);

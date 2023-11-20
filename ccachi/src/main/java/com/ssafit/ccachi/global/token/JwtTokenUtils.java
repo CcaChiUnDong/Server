@@ -18,7 +18,9 @@ public class JwtTokenUtils {
 
     public static String generateToken(UserResponseDto user, String key, long expiredTimeMs){
         Claims claims = Jwts.claims();
-        claims.put("user", user);
+        claims.put("id", user.getId());
+        claims.put("name", user.getName());
+        claims.put("email", user.getEmail());
 
         return Jwts.builder()
                 .setClaims(claims)
@@ -40,7 +42,6 @@ public class JwtTokenUtils {
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
-        System.out.println("claims = " + claims.toString());
 
         return claims;
     }

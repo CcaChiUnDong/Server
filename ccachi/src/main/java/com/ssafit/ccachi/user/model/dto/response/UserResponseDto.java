@@ -15,4 +15,13 @@ public class UserResponseDto {
     private String name;
     @NonNull
     private String email;
+
+    @Override
+    public String toString() {
+        return "UserResponseDto{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }

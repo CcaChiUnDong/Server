@@ -1,6 +1,7 @@
 package com.ssafit.ccachi.user.controller;
 
 
+import com.ssafit.ccachi.global.dto.response.GeneralStatusResponse;
 import com.ssafit.ccachi.global.token.JwtTokenUtils;
 import com.ssafit.ccachi.user.model.dto.request.CreateUserRequestDto;
 import com.ssafit.ccachi.user.model.dto.request.EmailCheckRequestDto;
@@ -14,7 +15,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -57,5 +60,14 @@ public class userController {
         UserResponseDto result = userService.login(loginUserRequestDto);
         String token = JwtTokenUtils.generateToken(result,key,expiredTimeMs);
         return ResponseEntity.ok().header("Authorization", "Bearer " + token).body(result);
+    }
+
+    @DeleteMapping()
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<?> delete(@RequestHeader Map<String, String> data) throws Exception{
+        String token = data.get("authorization").substring(7);
+        userService.delete(new Long(String.valueOf(JwtTokenUtils.parseJwtToken(token,key).get("id"))));
+        return ResponseEntity.ok().body("");
+
     }
 }

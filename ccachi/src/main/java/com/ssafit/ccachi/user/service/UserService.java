@@ -33,6 +33,7 @@ public class UserService {
     public void createUser(CreateUserRequestDto createUserRequestDto){ userRepository.createUser(createUserRequestDto); }
     public List<UserResponseDto> selectAll(){ return userRepository.selectAll().stream().map(converter::convert).collect(Collectors.toList()); }
     public UserResponseDto select(Long id){ return converter.convert(userRepository.select(id)); }
+    public void delete(Long id){ userRepository.delete(id); }
     public EmailCheckResponseDto check(String email) {  return EmailCheckResponseDto.builder().available(userRepository.check(email)).email(email).build(); }
     public UserResponseDto login(LoginUserRequestDto loginUserRequestDto) throws Exception {
         User user = userRepository.selectByEmail(loginUserRequestDto.getEmail());

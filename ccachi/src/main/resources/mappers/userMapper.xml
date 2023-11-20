@@ -37,36 +37,11 @@
 		VALUES (0, #{name}, #{password}, #{email})
 	</insert>
 
-	<!-- 상세글 조회 -->
-<!--	<select id="selectOne" resultMap="boardMap" parameterType="int">-->
-<!--		SELECT *-->
-<!--		FROM board-->
-<!--		WHERE id = #{id};-->
-<!--	</select>-->
+	<delete id="delete">
+		DELETE FROM ccachiuser
+		WHERE id = #{id}
+	</delete>
 
-
-	
-	<!-- 게시글 삭제 -->
-<!--	<delete id="deleteBoard" parameterType="int">-->
-<!--		DELETE FROM board-->
-<!--		WHERE id = #{id}-->
-<!--	</delete>-->
-	
-	<!-- 조회수 증가 -->
-<!--	<update id="updateViewCnt" parameterType="int">-->
-<!--		UPDATE board-->
-<!--		SET view_cnt = view_cnt+1-->
-<!--		WHERE id = #{id}-->
-<!--	</update>-->
-	
-	<!-- 게시글 수정 -->
-	<!-- 컬럼이 등록 날짜만 관리를 하고 있다. -->
-	<!-- 등록날짜 / 최근 조회날짜 / 수정 날짜 .... -->
-<!--	<update id="updateBoard" parameterType="board">-->
-<!--		UPDATE board-->
-<!--		SET title = #{title}, content = #{content}, reg_date = now()-->
-<!--		WHERE id = #{id}-->
-<!--	</update>-->
 	
 	<!-- 검색기능  -->
 <!--	<select id="search" resultType="Board" parameterType="SearchCondition">-->
