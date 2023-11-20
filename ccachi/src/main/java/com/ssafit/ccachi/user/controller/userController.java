@@ -9,6 +9,7 @@ import com.ssafit.ccachi.user.model.dto.request.LoginUserRequestDto;
 import com.ssafit.ccachi.user.model.dto.response.EmailCheckResponseDto;
 import com.ssafit.ccachi.user.model.dto.response.UserResponseDto;
 import com.ssafit.ccachi.user.service.UserService;
+import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -62,12 +63,19 @@ public class userController {
         return ResponseEntity.ok().header("Authorization", "Bearer " + token).body(result);
     }
 
+    @GetMapping()
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<UserResponseDto> tokenLogin(@RequestHeader Map<String, String> data) throws Exception{
+        String token = data.get("authorization").substring(7);
+        Claims claims = JwtTokenUtils.parseJwtToken(token,key);
+        UserResponseDto result = userService.select(new Long(String.valueOf(claims.get("id"))));
+        return ResponseEntity.ok().body(result);
+    }
+
     @DeleteMapping()
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<?> delete(@RequestHeader Map<String, String> data) throws Exception{
         String token = data.get("authorization").substring(7);
-        userService.delete(new Long(String.valueOf(JwtTokenUtils.parseJwtToken(token,key).get("id"))));
-        return ResponseEntity.ok().body("");
-
+        return ResponseEntity.ok().body(userService.delete(new Long(String.valueOf(JwtTokenUtils.parseJwtToken(token,key).get("id")))));
     }
 }

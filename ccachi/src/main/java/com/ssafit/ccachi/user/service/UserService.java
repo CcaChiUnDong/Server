@@ -2,6 +2,7 @@ package com.ssafit.ccachi.user.service;
 
 
 import com.ssafit.ccachi.global.dto.converter.DtoConverter;
+import com.ssafit.ccachi.global.dto.response.GeneralStatusResponse;
 import com.ssafit.ccachi.global.exception.CustomException;
 import com.ssafit.ccachi.global.token.JwtTokenUtils;
 import com.ssafit.ccachi.user.model.Entity.User;
@@ -33,7 +34,10 @@ public class UserService {
     public void createUser(CreateUserRequestDto createUserRequestDto){ userRepository.createUser(createUserRequestDto); }
     public List<UserResponseDto> selectAll(){ return userRepository.selectAll().stream().map(converter::convert).collect(Collectors.toList()); }
     public UserResponseDto select(Long id){ return converter.convert(userRepository.select(id)); }
-    public void delete(Long id){ userRepository.delete(id); }
+    public GeneralStatusResponse delete(Long id){
+        userRepository.delete(id);
+        return GeneralStatusResponse.builder().status(true).build();
+    }
     public EmailCheckResponseDto check(String email) {  return EmailCheckResponseDto.builder().available(userRepository.check(email)).email(email).build(); }
     public UserResponseDto login(LoginUserRequestDto loginUserRequestDto) throws Exception {
         User user = userRepository.selectByEmail(loginUserRequestDto.getEmail());
