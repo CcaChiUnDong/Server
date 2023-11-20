@@ -3,6 +3,7 @@ package com.ssafit.ccachi.board.model.repository;
 import com.ssafit.ccachi.board.dao.BoardDao;
 import com.ssafit.ccachi.board.model.Entity.Board;
 import com.ssafit.ccachi.board.model.dto.request.CreateBoardRequestDto;
+import com.ssafit.ccachi.board.model.dto.request.SearchConditionRequestDto;
 import com.ssafit.ccachi.board.model.dto.request.UpdateBoardRequestDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -20,6 +21,7 @@ public class BoardReposiroty {
     public void create(CreateBoardRequestDto createBoardRequestDto) throws Exception{ boardDao.create(createBoardRequestDto);}
 
     public List<Board> readAll(){ return boardDao.readAll(); }
+    public List<Board> search(SearchConditionRequestDto conditionRequestDto){ return boardDao.search(conditionRequestDto); }
     public Board read(Long id){
         boardDao.visit(id);
         return boardDao.read(id); }

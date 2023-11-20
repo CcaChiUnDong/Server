@@ -2,6 +2,7 @@ package com.ssafit.ccachi.board.service;
 
 import com.ssafit.ccachi.board.model.Entity.Board;
 import com.ssafit.ccachi.board.model.dto.request.CreateBoardRequestDto;
+import com.ssafit.ccachi.board.model.dto.request.SearchConditionRequestDto;
 import com.ssafit.ccachi.board.model.dto.request.UpdateBoardRequestDto;
 import com.ssafit.ccachi.board.model.dto.response.BoardActionStatusResponseDto;
 import com.ssafit.ccachi.board.model.dto.response.BoardResponseDto;
@@ -39,6 +40,21 @@ public class BoardService {
 
     public List<BoardResponseDto> readAll(){
         List<Board> boardList = boardReposiroty.readAll();
+        Map<Long, UserResponseDto> userMap = new HashMap<>();
+        for(Board board : boardList){
+            if(!userMap.containsKey(board.getUserId())){
+                userMap.put(board.getUserId(),userConverter.convert(userRepository.select(board.getUserId())));
+            }
+        }
+        List<BoardResponseDto> result = boardList.stream().map(converter::convert).collect(Collectors.toList());
+        for(BoardResponseDto board : result){
+            board.setUser(userMap.get(board.getUserId()));
+        }
+        return result;
+    }
+
+    public List<BoardResponseDto> search(SearchConditionRequestDto conditionRequestDto){
+        List<Board> boardList = boardReposiroty.search(conditionRequestDto);
         Map<Long, UserResponseDto> userMap = new HashMap<>();
         for(Board board : boardList){
             if(!userMap.containsKey(board.getUserId())){

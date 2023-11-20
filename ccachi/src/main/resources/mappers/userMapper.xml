@@ -42,32 +42,6 @@
 		WHERE id = #{id}
 	</delete>
 
-	
-	<!-- 검색기능  -->
-<!--	<select id="search" resultType="Board" parameterType="SearchCondition">-->
-<!--		SELECT id, content, writer, title, view_cnt as viewCnt, date_format(reg_date, '%Y-%M-%d') as regDate-->
-<!--		FROM board-->
-<!--		&lt;!&ndash; 검색 조건 (동적쿼리)&ndash;&gt;-->
-<!--		<if test="key != 'none'">-->
-<!--			WHERE ${key} LIKE concat('%', #{word}, '%')-->
-<!--		</if>-->
-<!--		&lt;!&ndash; 어떤 기준으로 어떤 방향으로 정렬 &ndash;&gt;-->
-<!--		<if test="orderBy != 'none'">-->
-<!--			ORDER BY ${orderBy} ${orderByDir}-->
-<!--		</if>-->
-<!--	</select>-->
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-
 
 
 </mapper>

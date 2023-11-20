@@ -1,6 +1,7 @@
 package com.ssafit.ccachi.board.controller;
 
 import com.ssafit.ccachi.board.model.dto.request.CreateBoardRequestDto;
+import com.ssafit.ccachi.board.model.dto.request.SearchConditionRequestDto;
 import com.ssafit.ccachi.board.model.dto.request.UpdateBoardRequestDto;
 import com.ssafit.ccachi.board.model.dto.response.BoardActionStatusResponseDto;
 import com.ssafit.ccachi.board.model.dto.response.BoardResponseDto;
@@ -28,6 +29,12 @@ public class BoardController {
     @ResponseStatus(HttpStatus.OK)
     public List<BoardResponseDto> readAll() throws Exception {
         return boardService.readAll();
+    }
+
+    @PostMapping("/search")
+    @ResponseStatus(HttpStatus.OK)
+    public List<BoardResponseDto> search(@RequestBody SearchConditionRequestDto conditionRequestDto) throws Exception {
+        return boardService.search(conditionRequestDto);
     }
 
     @GetMapping("/top3")

@@ -1,42 +1,66 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssafit.ccachi.board.dao.BoardDao">
-	<resultMap type="Board" id="boardMap">
-	</resultMap>
+    <resultMap type="Board" id="boardMap">
+    </resultMap>
 
-	<!-- 글쓰기 -->
-	<insert id="create" parameterType="Board" keyProperty="id" useGeneratedKeys="true">
-		INSERT INTO board (id,title, contents, user_id, url)
-		VALUES (0, #{title}, #{contents}, #{user_id}, #{url})
-	</insert>
+    <!-- 글쓰기 -->
+    <insert id="create" parameterType="Board" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO board (id,title, contents, user_id, url)
+        VALUES (0, #{title}, #{contents}, #{user_id}, #{url})
+    </insert>
 
-	<select id="readAll">
-		SELECT * FROM board
-		ORDER BY created_at DESC
-	</select>
-	<select id="read">
-		SELECT * FROM board
-		WHERE id = #{id}
-	</select>
-	<delete id="delete">
-		DELETE FROM board
-		WHERE id = #{id}
-	</delete>
-	<update id="update" >
-		UPDATE board
-		SET title = #{title}, contents = #{contents}, url = #{url}, created_at = now()
-		WHERE id = #{id}
-	</update>
-	<update id="visit">
-		UPDATE board SET visited = visited + 1 WHERE id = #{id}
-	</update>
+    <select id="readAll">
+        SELECT * FROM board
+        ORDER BY created_at DESC
+    </select>
+    <select id="read">
+        SELECT * FROM board
+        WHERE id = #{id}
+    </select>
+    <delete id="delete">
+        DELETE FROM board
+        WHERE id = #{id}
+    </delete>
+    <update id="update">
+        UPDATE board
+        SET title = #{title}, contents = #{contents}, url = #{url}, created_at = now()
+        WHERE id = #{id}
+    </update>
+    <update id="visit">
+        UPDATE board SET visited = visited + 1 WHERE id = #{id}
+    </update>
 
-	<select id="readTop3">
-		SELECT *
-		FROM board
-		ORDER BY visited DESC, comment_count DESC
-		LIMIT 3;
-	</select>
+    <select id="readTop3">
+        SELECT *
+        FROM board
+        ORDER BY visited DESC, comment_count DESC
+        LIMIT 3;
+    </select>
+
+    <select id="search" parameterType="SearchConditionRequestDto">
+        SELECT b.*
+        FROM board b
+        <!-- 검색 조건 (동적쿼리)-->
+        <if test="key != 'none'">
+            <choose>
+                <when test="key == 'user_id'">
+                    JOIN ccachiuser cu ON b.user_id = cu.id
+                    WHERE cu.name = #{word}
+                </when>
+                <otherwise>
+                    WHERE b.${key} LIKE CONCAT('%', #{word}, '%')
+                </otherwise>
+            </choose>
+        </if>
+        <!-- 어떤 기준으로 어떤 방향으로 정렬 -->
+        <if test="orderBy != 'none'">
+            ORDER BY b.${orderBy} ${orderByDir}
+        </if>
+    </select>
+
+
+
 </mapper>
