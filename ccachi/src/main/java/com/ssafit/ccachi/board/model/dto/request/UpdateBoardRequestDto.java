@@ -15,4 +15,5 @@ public class UpdateBoardRequestDto {
     private String contents;
     @NonNull
     private String title;
+    private String url;
 }

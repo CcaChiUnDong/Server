@@ -25,4 +25,7 @@ public class BoardReposiroty {
         return boardDao.read(id); }
     public void delete(Long id){ boardDao.delete(id); }
     public void update(UpdateBoardRequestDto updateBoardRequestDto) throws Exception{ boardDao.update(updateBoardRequestDto);}
+
+    public List<Board> readTop3() {return boardDao.readTop3();
+    }
 }

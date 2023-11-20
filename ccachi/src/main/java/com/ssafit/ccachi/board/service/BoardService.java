@@ -69,4 +69,19 @@ public class BoardService {
         boardReposiroty.update(updateBoardRequestDto);
         return BoardActionStatusResponseDto.builder().status(true).build();
     }
+
+    public List<BoardResponseDto> readTop3() {
+        List<Board> boardList = boardReposiroty.readTop3();
+        Map<Long, UserResponseDto> userMap = new HashMap<>();
+        for(Board board : boardList){
+            if(!userMap.containsKey(board.getUserId())){
+                userMap.put(board.getUserId(),userConverter.convert(userRepository.select(board.getUserId())));
+            }
+        }
+        List<BoardResponseDto> result = boardList.stream().map(converter::convert).collect(Collectors.toList());
+        for(BoardResponseDto board : result){
+            board.setUser(userMap.get(board.getUserId()));
+        }
+        return result;
+    }
 }
