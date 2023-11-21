@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:5173/")
+@ControllerAdvice(annotations = RestController.class)
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/board")

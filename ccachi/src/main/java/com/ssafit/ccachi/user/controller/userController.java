@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:5173/", exposedHeaders = "Authorization")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/user")
@@ -69,6 +69,7 @@ public class userController {
         String token = data.get("authorization").substring(7);
         Claims claims = JwtTokenUtils.parseJwtToken(token,key);
         UserResponseDto result = userService.select(new Long(String.valueOf(claims.get("id"))));
+        System.out.println(ResponseEntity.ok().body(result));
         return ResponseEntity.ok().body(result);
     }
 
