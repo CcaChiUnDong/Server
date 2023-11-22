@@ -26,10 +26,10 @@ public class BoardController {
         return boardService.create(createBoardRequestDto);
     }
 
-    @GetMapping("/count")
+    @PostMapping("/count")
     @ResponseStatus(HttpStatus.OK)
-    public int boardCount() throws Exception {
-        return boardService.count();
+    public int boardCount(@RequestBody SearchConditionRequestDto conditionRequestDto) throws Exception {
+        return boardService.count(conditionRequestDto);
     }
 
     @PostMapping("/search")

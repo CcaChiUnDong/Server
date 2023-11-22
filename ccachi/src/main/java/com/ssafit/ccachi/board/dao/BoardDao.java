@@ -26,7 +26,7 @@ public interface BoardDao {
 
     List<Board> readTop3();
 
-    int count();
+    int count(SearchConditionRequestDto searchConditionRequestDto);
 
     List<Board> findFromTo(SearchConditionRequestDto searchConditionRequestDto);
 }

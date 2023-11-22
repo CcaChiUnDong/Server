@@ -66,34 +66,6 @@ public class BoardService {
         for (BoardResponseDto board : result) {
             board.setUser(userMap.get(board.getUserId()));
         }
-//
-//        PagingUtil pu = new PagingUtil(p_num, 10, 10); // ($1:표시할 현재 페이지, $2:한페이지에 표시할 글 수, $3:한 페이지에 표시할 페이지 버튼의 수 )
-//        pu.setObjectCountTotal(findAllCount());
-//        pu.setCalcForPaging();
-//        List<Board> list = boardReposiroty.findFromTo(conditionRequestDto, pu.getObjectStartNum(), pu.getObjectCountPerPage());
-//        Map<Long, UserResponseDto> userMap = new HashMap<>();
-//        for(Board board : list){
-//            if(!userMap.containsKey(board.getUserId())){
-//                userMap.put(board.getUserId(),userConverter.convert(userRepository.select(board.getUserId())));
-//            }
-//        }
-//        List<BoardResponseDto> result = list.stream().map(converter::convert).collect(Collectors.toList());
-//        for(BoardResponseDto board : result){
-//            board.setUser(userMap.get(board.getUserId()));
-//        }
-//
-//        System.out.println("p_num : "+p_num);
-//        System.out.println(pu.toString());
-//
-//        if (list == null || list.size() == 0) {
-//            return null;
-//        }
-//
-//        result.put("pagingData", pu);
-//        result.put("list", list);
-//
-//        return ResponseEntity.ok(result);
-
         return result;
     }
 
@@ -108,8 +80,9 @@ public class BoardService {
         return boardList.stream().map(converter::convert).peek(board -> board.setUser(userMap.get(board.getUserId()))).collect(Collectors.toList());
     }
 
-    public int count() {
-        return (int) boardReposiroty.count();
+    public int count(SearchConditionRequestDto conditionRequestDto) {
+        System.out.println(boardReposiroty.count(conditionRequestDto));
+        return (int) boardReposiroty.count(conditionRequestDto);
     }
 
     public BoardResponseDto read(Long id) {

@@ -47,8 +47,8 @@ public class BoardReposiroty {
         return boardDao.readTop3();
     }
 
-    public int count() {
-        return boardDao.count();
+    public int count(SearchConditionRequestDto conditionRequestDto) {
+        return boardDao.count(conditionRequestDto);
     }
 
     public List<Board> findFromTo(SearchConditionRequestDto conditionRequestDto) {
