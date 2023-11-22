@@ -26,16 +26,17 @@ public class BoardController {
         return boardService.create(createBoardRequestDto);
     }
 
-    @GetMapping()
+    @GetMapping("/count")
     @ResponseStatus(HttpStatus.OK)
-    public List<BoardResponseDto> readAll() throws Exception {
-        return boardService.readAll();
+    public int boardCount() throws Exception {
+        return boardService.count();
     }
 
     @PostMapping("/search")
     @ResponseStatus(HttpStatus.OK)
     public List<BoardResponseDto> search(@RequestBody SearchConditionRequestDto conditionRequestDto) throws Exception {
-        return boardService.search(conditionRequestDto);
+        System.out.println(conditionRequestDto.toString());
+        return boardService.searchWithPaging(conditionRequestDto);
     }
 
     @GetMapping("/top3")

@@ -18,16 +18,40 @@ public class BoardReposiroty {
 
     private final BoardDao boardDao;
 
-    public void create(CreateBoardRequestDto createBoardRequestDto) throws Exception{ boardDao.create(createBoardRequestDto);}
+    public void create(CreateBoardRequestDto createBoardRequestDto) throws Exception {
+        boardDao.create(createBoardRequestDto);
+    }
 
-    public List<Board> readAll(){ return boardDao.readAll(); }
-    public List<Board> search(SearchConditionRequestDto conditionRequestDto){ return boardDao.search(conditionRequestDto); }
-    public Board read(Long id){
+    public List<Board> readAll() {
+        return boardDao.readAll();
+    }
+
+    public List<Board> search(SearchConditionRequestDto conditionRequestDto) {
+        return boardDao.search(conditionRequestDto);
+    }
+
+    public Board read(Long id) {
         boardDao.visit(id);
-        return boardDao.read(id); }
-    public void delete(Long id){ boardDao.delete(id); }
-    public void update(UpdateBoardRequestDto updateBoardRequestDto) throws Exception{ boardDao.update(updateBoardRequestDto);}
+        return boardDao.read(id);
+    }
 
-    public List<Board> readTop3() {return boardDao.readTop3();
+    public void delete(Long id) {
+        boardDao.delete(id);
+    }
+
+    public void update(UpdateBoardRequestDto updateBoardRequestDto) throws Exception {
+        boardDao.update(updateBoardRequestDto);
+    }
+
+    public List<Board> readTop3() {
+        return boardDao.readTop3();
+    }
+
+    public int count() {
+        return boardDao.count();
+    }
+
+    public List<Board> findFromTo(SearchConditionRequestDto conditionRequestDto) {
+        return boardDao.findFromTo(conditionRequestDto);
     }
 }

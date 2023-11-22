@@ -40,6 +40,11 @@
         LIMIT 3;
     </select>
 
+    <select id="count">
+        SELECT count(*)
+        FROM board;
+    </select>
+
     <select id="search" parameterType="SearchConditionRequestDto">
         SELECT b.*
         FROM board b
@@ -56,11 +61,44 @@
             </choose>
         </if>
         <!-- 어떤 기준으로 어떤 방향으로 정렬 -->
-        <if test="orderBy != 'none'">
-            ORDER BY b.${orderBy} ${orderByDir}
-        </if>
+        <choose>
+            <when test="orderBy != 'none'">
+                ORDER BY b.${orderBy} ${orderByDir}
+            </when>
+            <otherwise>
+                ORDER BY b.created_at DESC;
+            </otherwise>
+        </choose>
     </select>
 
-
+    <select id="findFromTo" resultType="Board" parameterType="SearchConditionRequestDto">
+        SELECT b.*
+        FROM board b
+        <if test="key != 'none'">
+            <choose>
+                <when test="key == 'user_id'">
+                    JOIN ccachiuser cu ON b.user_id = cu.id
+                    <where>
+                        cu.name LIKE CONCAT('%', #{word}, '%')
+                    </where>
+                </when>
+                <otherwise>
+                    <where>
+                        b.${key} LIKE CONCAT('%', #{word}, '%')
+                    </where>
+                </otherwise>
+            </choose>
+        </if>
+        <!-- 어떤 기준으로 어떤 방향으로 정렬 -->
+        <choose>
+            <when test="orderBy != 'none'">
+                ORDER BY b.${orderBy} ${orderByDir}
+            </when>
+            <otherwise>
+                ORDER BY b.created_at DESC
+            </otherwise>
+        </choose>
+        LIMIT #{objectStartNum}, #{objectEndNum}
+    </select>
 
 </mapper>

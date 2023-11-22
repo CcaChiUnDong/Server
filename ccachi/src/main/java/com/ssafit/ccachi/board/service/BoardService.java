@@ -12,6 +12,7 @@ import com.ssafit.ccachi.user.model.Entity.User;
 import com.ssafit.ccachi.user.model.dto.response.UserResponseDto;
 import com.ssafit.ccachi.user.model.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,8 +29,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class BoardService {
 
-    private final DtoConverter<Board,BoardResponseDto> converter;
-    private final DtoConverter<User,UserResponseDto> userConverter;
+    private final DtoConverter<Board, BoardResponseDto> converter;
+    private final DtoConverter<User, UserResponseDto> userConverter;
     private final BoardReposiroty boardReposiroty;
     private final UserRepository userRepository;
 
@@ -38,37 +39,80 @@ public class BoardService {
         return BoardActionStatusResponseDto.builder().status(true).build();
     }
 
-    public List<BoardResponseDto> readAll(){
+    public List<BoardResponseDto> readAll() {
         List<Board> boardList = boardReposiroty.readAll();
         Map<Long, UserResponseDto> userMap = new HashMap<>();
-        for(Board board : boardList){
-            if(!userMap.containsKey(board.getUserId())){
-                userMap.put(board.getUserId(),userConverter.convert(userRepository.select(board.getUserId())));
+        for (Board board : boardList) {
+            if (!userMap.containsKey(board.getUserId())) {
+                userMap.put(board.getUserId(), userConverter.convert(userRepository.select(board.getUserId())));
             }
         }
         List<BoardResponseDto> result = boardList.stream().map(converter::convert).collect(Collectors.toList());
-        for(BoardResponseDto board : result){
+        for (BoardResponseDto board : result) {
             board.setUser(userMap.get(board.getUserId()));
         }
         return result;
     }
 
-    public List<BoardResponseDto> search(SearchConditionRequestDto conditionRequestDto){
+    public List<BoardResponseDto> search(SearchConditionRequestDto conditionRequestDto, Integer p_num) {
         List<Board> boardList = boardReposiroty.search(conditionRequestDto);
         Map<Long, UserResponseDto> userMap = new HashMap<>();
-        for(Board board : boardList){
-            if(!userMap.containsKey(board.getUserId())){
-                userMap.put(board.getUserId(),userConverter.convert(userRepository.select(board.getUserId())));
+        for (Board board : boardList) {
+            if (!userMap.containsKey(board.getUserId())) {
+                userMap.put(board.getUserId(), userConverter.convert(userRepository.select(board.getUserId())));
             }
         }
         List<BoardResponseDto> result = boardList.stream().map(converter::convert).collect(Collectors.toList());
-        for(BoardResponseDto board : result){
+        for (BoardResponseDto board : result) {
             board.setUser(userMap.get(board.getUserId()));
         }
+//
+//        PagingUtil pu = new PagingUtil(p_num, 10, 10); // ($1:표시할 현재 페이지, $2:한페이지에 표시할 글 수, $3:한 페이지에 표시할 페이지 버튼의 수 )
+//        pu.setObjectCountTotal(findAllCount());
+//        pu.setCalcForPaging();
+//        List<Board> list = boardReposiroty.findFromTo(conditionRequestDto, pu.getObjectStartNum(), pu.getObjectCountPerPage());
+//        Map<Long, UserResponseDto> userMap = new HashMap<>();
+//        for(Board board : list){
+//            if(!userMap.containsKey(board.getUserId())){
+//                userMap.put(board.getUserId(),userConverter.convert(userRepository.select(board.getUserId())));
+//            }
+//        }
+//        List<BoardResponseDto> result = list.stream().map(converter::convert).collect(Collectors.toList());
+//        for(BoardResponseDto board : result){
+//            board.setUser(userMap.get(board.getUserId()));
+//        }
+//
+//        System.out.println("p_num : "+p_num);
+//        System.out.println(pu.toString());
+//
+//        if (list == null || list.size() == 0) {
+//            return null;
+//        }
+//
+//        result.put("pagingData", pu);
+//        result.put("list", list);
+//
+//        return ResponseEntity.ok(result);
+
         return result;
     }
 
-    public BoardResponseDto read(Long id){
+    public List<BoardResponseDto> searchWithPaging(SearchConditionRequestDto conditionRequestDto) {
+        List<Board> boardList = boardReposiroty.findFromTo(conditionRequestDto);
+        Map<Long, UserResponseDto> userMap = new HashMap<>();
+        for (Board board : boardList) {
+            if (!userMap.containsKey(board.getUserId())) {
+                userMap.put(board.getUserId(), userConverter.convert(userRepository.select(board.getUserId())));
+            }
+        }
+        return boardList.stream().map(converter::convert).peek(board -> board.setUser(userMap.get(board.getUserId()))).collect(Collectors.toList());
+    }
+
+    public int count() {
+        return (int) boardReposiroty.count();
+    }
+
+    public BoardResponseDto read(Long id) {
         Board targetBoard = boardReposiroty.read(id);
         BoardResponseDto result = converter.convert(targetBoard);
         UserResponseDto user = userConverter.convert(userRepository.select(result.getUserId()));
@@ -89,13 +133,13 @@ public class BoardService {
     public List<BoardResponseDto> readTop3() {
         List<Board> boardList = boardReposiroty.readTop3();
         Map<Long, UserResponseDto> userMap = new HashMap<>();
-        for(Board board : boardList){
-            if(!userMap.containsKey(board.getUserId())){
-                userMap.put(board.getUserId(),userConverter.convert(userRepository.select(board.getUserId())));
+        for (Board board : boardList) {
+            if (!userMap.containsKey(board.getUserId())) {
+                userMap.put(board.getUserId(), userConverter.convert(userRepository.select(board.getUserId())));
             }
         }
         List<BoardResponseDto> result = boardList.stream().map(converter::convert).collect(Collectors.toList());
-        for(BoardResponseDto board : result){
+        for (BoardResponseDto board : result) {
             board.setUser(userMap.get(board.getUserId()));
         }
         return result;

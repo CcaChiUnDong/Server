@@ -1,46 +1,30 @@
 package com.ssafit.ccachi.board.model.dto.request;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@Builder
 public class SearchConditionRequestDto {
     private String key = "none";
     private String word;
     private String orderBy = "none";
     private String orderByDir;
+    private Integer objectStartNum;
+    private Integer objectEndNum;
 
-    // 기본 생성자습관
-    public SearchConditionRequestDto() {
-//		this.key = "none";
-//		this.orderBy = "none";
-    }
-
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-    public String getWord() {
-        return word;
-    }
-
-    public void setWord(String word) {
-        this.word = word;
-    }
-
-    public String getOrderBy() {
-        return orderBy;
-    }
-
-    public void setOrderBy(String orderBy) {
-        this.orderBy = orderBy;
-    }
-
-    public String getOrderByDir() {
-        return orderByDir;
-    }
-
-    public void setOrderByDir(String orderByDir) {
-        this.orderByDir = orderByDir;
+    public String toString() {
+        return "SearchConditionRequestDto{" +
+                "key='" + key + '\'' +
+                ", word='" + word + '\'' +
+                ", orderBy='" + orderBy + '\'' +
+                ", orderByDir='" + orderByDir + '\'' +
+                ", objectStartNum=" + objectStartNum +
+                ", objectEndNum=" + objectEndNum +
+                '}';
     }
 }
